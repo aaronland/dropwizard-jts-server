@@ -11,3 +11,8 @@ Health Check
 ---
 
 To see your applications health enter url `http://localhost:8081/healthcheck`
+
+## See also
+
+* https://lin-ear-th-inking.blogspot.com/2022/01/concave-hulls-in-jts.html
+* https://github.com/locationtech/jts/blob/master/modules/io/common/src/main/java/org/locationtech/jts/io/geojson/GeoJsonReader.java
