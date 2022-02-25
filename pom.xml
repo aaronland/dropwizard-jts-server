@@ -7,7 +7,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>info.aaronland.jts</groupId>
-    <artifactId>jts</artifactId>
+    <artifactId>jts-server</artifactId>
     <version>0.0.1</version>
     <packaging>jar</packaging>
 
@@ -17,7 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <dropwizard.version>2.0.28</dropwizard.version>
-        <mainClass>clustr.clustrApplication</mainClass>
+        <mainClass>jts.JTSApplication</mainClass>
     </properties>
 
     <dependencyManagement>
@@ -36,20 +36,28 @@
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.validation</groupId>
-            <artifactId>jakarta.validation-api</artifactId>
-        </dependency>
-        <dependency>
+	</dependency>
+	<dependency>
+	  <groupId>io.dropwizard</groupId>
+	  <artifactId>dropwizard-forms</artifactId>
+	</dependency>	
+	<dependency>
+	  <groupId>com.fasterxml.jackson.core</groupId>
+	  <artifactId>jackson-annotations</artifactId>
+	</dependency>
+	<dependency>
+	  <groupId>jakarta.validation</groupId>
+	  <artifactId>jakarta.validation-api</artifactId>
+	</dependency>
+	<dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
 	</dependency>
-
+	<dependency>
+	  <groupId>org.glassfish.jersey.media</groupId>
+	  <artifactId>jersey-media-multipart</artifactId>
+	  <version>2.29.1</version>
+	</dependency>
 	<dependency>
 	  <groupId>org.locationtech.jts</groupId>
 	  <artifactId>jts-core</artifactId>

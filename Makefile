@@ -5,3 +5,7 @@ exec:
 build: 
 	mvn clean
 	mvn install
+
+# TO DO: derive version from pom.xml
+run:
+	java -jar target/jts-server-0.0.1.jar server
