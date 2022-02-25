@@ -1,7 +1,7 @@
 package jts;
 
-import java.io.InputStream;
-import java.io.File;
+// https://lin-ear-th-inking.blogspot.com/2021/05/fixing-invalid-geometry-with-jts.html
+// https://github.com/locationtech/jts/blob/master/modules/core/src/main/java/org/locationtech/jts/geom/util/GeometryFixer.java
 
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
@@ -18,79 +18,72 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.Response;
 
-// import java.net.URL;
+import java.net.URL;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.locationtech.jts.io.geojson.GeoJsonReader;
+// import org.locationtech.jts.io.geojson.GeoJsonReader;
+import org.locationtech.jts.io.geojson.GeoJsonWriter;
 import org.locationtech.jts.geom.Geometry;
-
-// import org.apache.commons.io.IOUtils;
+import org.locationtech.jts.geom.util.GeometryFixer;
 
 import java.io.InputStream;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 
-@Path(value = "/fix")
+@Path(value = "/fix/geometry")
 @Produces({MediaType.APPLICATION_JSON})
 public class FixGeometryResource {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FixGeometryResource.class);
 
-    /*
-    @GET
-    public Response extrudeThisURL(@QueryParam("url") String url){
 
-	Document doc;
-	DocumentView view;
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})    
+    public Response fixGeometry(@QueryParam("url") String url){
+
+	InputStream input;
 
 	try {
-	    doc = extrudeThis(url);
-	    view = new DocumentView(doc);
-	}
-
-	// TODO: trap MalformedURLExceptions and return NOT_ACCEPTABLE here (20130901/straup)
+	    input = new URL(url).openStream();
+	} 
 
 	catch (Exception e){
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.toString()).build();
 	}
-
-	//String html = doc.toHTML();
-	//return Response.status(Response.Status.OK).entity(html).build();
-
-	return Response.status(Response.Status.OK).entity(view).build();
+	
+	return fixGeometryFromInputStream(input);
     }
-    */
     
     @POST
     @Consumes({MediaType.MULTIPART_FORM_DATA + ";charset=utf-8"})
-    public Response extrudeThisFile(@FormDataParam("file") InputStream input){
+    @Produces({MediaType.APPLICATION_JSON})    
+    public Response fixGeometry(@FormDataParam("file") InputStream input){
 
-	// START OF put me in a function
-	// This always seems to fail because... I don't know
-	// https://github.com/locationtech/jts/issues/844
+	return fixGeometryFromInputStream(input);
+    }
+
+    @Produces({MediaType.APPLICATION_JSON})        
+    private Response fixGeometryFromInputStream(InputStream input){
 	
-	GeoJsonReader reader = new GeoJsonReader();
+	GeometryReader reader = new GeometryReader();
 	Geometry geom;
 
 	try {
-
-	    BufferedReader buf = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8));
-	    geom = reader.read(buf);
+	    geom = reader.fromGeoJSON(input);
 	}
 
 	catch (Exception e){
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.toString()).build();
 	}
 
-	// END OF put me in a function
+	Geometry valid = GeometryFixer.fix(geom);
 
-	// https://lin-ear-th-inking.blogspot.com/2021/05/fixing-invalid-geometry-with-jts.html
-	// https://github.com/locationtech/jts/blob/master/modules/core/src/main/java/org/locationtech/jts/geom/util/GeometryFixer.java
+	// TBD: How to pass the Response writer to the GeoJSON writer
 	
-	return Response.status(Response.Status.OK).entity("OK").build();
+	GeoJsonWriter writer = new GeoJsonWriter();
+	String output = writer.write(valid);
+	
+	return Response.status(Response.Status.OK).entity(output).build();
     }
-
+    
 }

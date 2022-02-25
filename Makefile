@@ -12,3 +12,13 @@ run:
 
 debug:
 	make build && make run
+
+docker:
+ifdef NOCACHE
+	docker build --no-cache=true -t jts-server .
+else
+	docker build -t jts-server .
+endif
+
+docker-run:
+	docker run -it -p 8080:8080 jts-server java -jar /usr/local/jar/jts-server.jar server
