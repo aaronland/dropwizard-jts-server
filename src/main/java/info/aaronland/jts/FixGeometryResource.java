@@ -65,10 +65,12 @@ public class FixGeometryResource {
     */
     
     @POST
-    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Consumes({MediaType.MULTIPART_FORM_DATA + ";charset=utf-8"})
     public Response extrudeThisFile(@FormDataParam("file") InputStream input){
 
 	// START OF put me in a function
+	// This always seems to fail because... I don't know
+	// https://github.com/locationtech/jts/issues/844
 	
 	GeoJsonReader reader = new GeoJsonReader();
 	Geometry geom;
@@ -84,6 +86,9 @@ public class FixGeometryResource {
 	}
 
 	// END OF put me in a function
+
+	// https://lin-ear-th-inking.blogspot.com/2021/05/fixing-invalid-geometry-with-jts.html
+	// https://github.com/locationtech/jts/blob/master/modules/core/src/main/java/org/locationtech/jts/geom/util/GeometryFixer.java
 	
 	return Response.status(Response.Status.OK).entity("OK").build();
     }

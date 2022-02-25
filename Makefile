@@ -9,3 +9,6 @@ build:
 # TO DO: derive version from pom.xml
 run:
 	java -jar target/jts-server-0.0.1.jar server
+
+debug:
+	make build && make run
