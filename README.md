@@ -42,7 +42,7 @@ Or a `url` parameter in a `GET` request:
 $> curl 'http://localhost:8080/fix/geometry?url=https://static.sfomuseum.org/geojson/id/102527513'
 ```
 
-_Note: There are currently no checks on file upload size or validating `url` parameters._
+_Note: There are currently no checks on upload file sizes or validating `url` parameters._
 
 See also:
 
