@@ -6,12 +6,12 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>clustr</groupId>
-    <artifactId>0.0.1</artifactId>
+    <groupId>info.aaronland.jts</groupId>
+    <artifactId>jts</artifactId>
     <version>0.0.1</version>
     <packaging>jar</packaging>
 
-    <name>clustr</name>
+    <name>jts-server</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -48,7 +48,14 @@
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-        </dependency>
+	</dependency>
+
+	<dependency>
+	  <groupId>org.locationtech.jts</groupId>
+	  <artifactId>jts-core</artifactId>
+	  <version>1.18.2</version>
+	</dependency>
+	
     </dependencies>
 
     <build>

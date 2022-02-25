@@ -1,4 +1,4 @@
 logging:
   level: INFO
   loggers:
-    clustr: DEBUG
+    info.aaronland.jts: DEBUG
