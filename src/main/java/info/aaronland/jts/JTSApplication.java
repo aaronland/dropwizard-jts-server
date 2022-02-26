@@ -27,7 +27,8 @@ public class JTSApplication extends Application<JTSConfiguration> {
     public void run(final JTSConfiguration configuration,
                     final Environment env) {
 
-        env.jersey().register(new FixGeometryResource());	
+        env.jersey().register(new FixGeometryResource());
+        env.jersey().register(new ConcaveHullResource());		
     }
 
 }
