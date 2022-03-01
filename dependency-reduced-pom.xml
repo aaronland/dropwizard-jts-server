@@ -4,7 +4,7 @@
   <groupId>info.aaronland.jts</groupId>
   <artifactId>jts-server</artifactId>
   <name>jts-server</name>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
   <build>
     <plugins>
       <plugin>

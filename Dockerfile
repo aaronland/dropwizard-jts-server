@@ -30,4 +30,4 @@ RUN mkdir /usr/local/jar
 
 # TO DO: derive version number from pom.xml...
 
-COPY --from=builder /usr/src/dropwizard-jts-server/target/jts-server-0.0.1.jar /usr/local/jar/jts-server.jar
+COPY --from=builder /usr/src/dropwizard-jts-server/target/jts-server-0.0.2.jar /usr/local/jar/jts-server.jar
