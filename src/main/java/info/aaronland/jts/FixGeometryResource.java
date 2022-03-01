@@ -23,7 +23,6 @@ import java.net.URL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-// import org.locationtech.jts.io.geojson.GeoJsonReader;
 import org.locationtech.jts.io.geojson.GeoJsonWriter;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.util.GeometryFixer;

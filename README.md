@@ -26,7 +26,7 @@ $> java -jar target/jts-server-0.0.1.jar server
 
 ## Endpoints
 
-### /fix/geometry
+### fix/geometry
 
 This endpoint will run the JTS `GeometryFixer` utility using a GeoJSON document as it's input returning a new GeoJSON document. The new document will not contain any GeoJSON `properties` from the original document.
 
@@ -49,6 +49,28 @@ See also:
 * https://lin-ear-th-inking.blogspot.com/2021/05/fixing-invalid-geometry-with-jts.html
 * https://github.com/locationtech/jts/blob/master/modules/core/src/main/java/org/locationtech/jts/geom/util/GeometryFixer.java
 
+### hull/concave
+
+This endpoint will run the JTS `ConcaveHull` utility using a GeoJSON document as it's input returning a new GeoJSON document. The new document will not contain any GeoJSON `properties` from the original document.
+
+This endpoint accepts multi-part form HTTP `POST` request:
+
+```
+$> curl -v -X POST -F file=@102527513.geojson localhost:8080/hull/concave
+```
+
+Or a `url` parameter in a `GET` request:
+
+```
+$> curl 'http://localhost:8080/hull/concave?url=https://static.sfomuseum.org/geojson/id/102527513'
+```
+
+_Note: There are currently no checks on upload file sizes or validating `url` parameters._
+
+See also:
+
+* https://lin-ear-th-inking.blogspot.com/2022/01/concave-hulls-in-jts.html
+
 ## Docker
 
 Yes.
@@ -61,7 +83,7 @@ $> docker run -it -p 8080:8080 jts-server java -jar /usr/local/jar/jts-server.ja
 
 ## Known knowns
 
-* The `GeoJsonReader` (and `GeoJsonConstants`) packages have been cloned in to `info.aaronland.jts` package. I don't know why this is necessary but it fixes the ["Could not parse Geometry from GeoJson string. Unsupported 'type':Feature" errors](https://github.com/locationtech/jts/issues/844) bug report. I don't know why it fixes the problem either.
+* This bundles [locationtech/jts](https://github.com/locationtech/jts) as of commit [23cb0cefc9f6c9d7cf7b4946c19165aca2e78000](https://github.com/locationtech/jts/commit/23cb0cefc9f6c9d7cf7b4946c19165aca2e78000) rather than using Maven. That's because specific functionality, notably parsing GeoJSON `Feature` records and support for concave hulls is not available in the Maven releases at this time.
 
 ## See also:
 

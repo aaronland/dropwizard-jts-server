@@ -1,6 +1,7 @@
 package jts;
 
 import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.io.geojson.GeoJsonReader;
 
 import java.io.InputStream;
 import java.io.BufferedReader;

@@ -58,6 +58,12 @@
 	  <artifactId>jersey-media-multipart</artifactId>
 	  <version>2.29.1</version>
 	</dependency>
+
+	<!-- START OF pending updates to Maven releases for JTS -->
+	<!-- https://github.com/locationtech/jts/issues/844 -->
+	
+	<!--
+	
 	<dependency>
 	  <groupId>org.locationtech.jts</groupId>
 	  <artifactId>jts-core</artifactId>
@@ -69,6 +75,19 @@
 	  <artifactId>jts-io-common</artifactId>
 	  <version>1.18.2</version>
 	</dependency>
+
+	-->
+
+	<!-- This shouldn't be necessary once we can rely on Maven dependency -->
+	
+	<dependency>
+	  <groupId>org.apache.clerezza.ext</groupId>
+	  <artifactId>org.json.simple</artifactId>
+	  <version>0.4</version>
+	</dependency>
+
+	<!-- END OF pending updates to Maven releases for JTS -->
+	
       <dependency>
 	<groupId>commons-io</groupId>
 	<artifactId>commons-io</artifactId>
