@@ -8,7 +8,7 @@
 
     <groupId>info.aaronland.jts</groupId>
     <artifactId>jts-server</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
     <packaging>jar</packaging>
 
     <name>jts-server</name>
